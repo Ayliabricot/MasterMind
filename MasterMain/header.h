@@ -1,1 +1,5 @@
-#pragma once
+#ifndef MASTERMIND
+#define MASTERIND
+
+
+#endif
