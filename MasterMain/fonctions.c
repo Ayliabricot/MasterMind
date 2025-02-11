@@ -48,7 +48,7 @@ void remplirCombinaison(Couleur** combinaison, int taille, char couleurs[9][9]) 
 	printf("\n");
 	for (int i = 0; i < taille; i++) {
 		printf("Couleur en position %d : ", i + 1);
-		scanf_s("%d", &choix);
+		scanf_s("%1d", &choix);
 		combinaison[i] = definirCouleur(couleurs[choix - 1]);
 	}
 }
