@@ -92,12 +92,23 @@ int verifier(Couleur** proposition, int taille, Couleur** reponse, Couleur** cor
 
 void afficherTout(Couleur*** tableau_propositions, Couleur*** tableau_corrections, int tentatives, int taille, char couleurs[9][9], char ansi[9][9]) {
 	for (int i = 0; i < tentatives; i++) {
-		printf("Essai %d : ", tentatives + 1);
+		printf("Essai %d : ", i + 1);
 		afficherCombinaison(tableau_propositions[i], taille, couleurs, ansi);
 		printf("       -> ");
 		afficherCombinaison(tableau_corrections[i], taille, couleurs, ansi);
+		printf("\n");
 	}
-	printf("\n");
+}
+
+void libererMemoire(Couleur*** tableau_propositions, Couleur*** tableau_corrections, Couleur** reponse) {
+	free(tableau_propositions);
+	tableau_propositions = NULL;
+
+	free(tableau_corrections);
+	tableau_corrections = NULL;
+
+	free(reponse);
+	reponse = NULL;
 }
 
 
