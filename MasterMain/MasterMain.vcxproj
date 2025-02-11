@@ -24,6 +24,7 @@
     <ProjectGuid>{a9baa7e8-bc6a-4c36-b0de-c30b2e92a32e}</ProjectGuid>
     <RootNamespace>MasterMain</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>MasterMind</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
