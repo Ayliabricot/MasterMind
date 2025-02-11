@@ -2,26 +2,27 @@
 #include <stdlib.h>
 #include "header.h"
 #include <time.h>
+#include <windows.h>
 
-Combinaison* creerCombinaison(int taille) {
-	Combinaison* nouvelle_combinaison = malloc(taille * sizeof(Combinaison));
-	nouvelle_combinaison = NULL;
-
+Couleur** creerCombinaison(int taille) {
+	Couleur** nouvelle_combinaison = malloc(taille * sizeof(Couleur));
+	for (int i = 0; i < taille; i++) {
+		nouvelle_combinaison[i] = NULL;
+	}
 	return nouvelle_combinaison;
 }
 
-void definirCouleurs(Combinaison* combinaison) {
-	combinaison->couleur[0] = "rouge";
-	combinaison->couleur[1] = "vert";
-	combinaison->couleur[2] = "bleu";
-	combinaison->couleur[3] = "jaune";
-	combinaison->couleur[4] = "orange";
-	combinaison->couleur[5] = "violet";
-	combinaison->couleur[6] = "rose";
-	combinaison->couleur[7] = "blanc";
+Couleur* definirCouleur(char couleur[9]) {
+	Couleur* nouvelle_couleur = malloc(sizeof(Couleur));
+	strcpy_s(nouvelle_couleur->couleur, sizeof(couleur), couleur);
+	return nouvelle_couleur;
 }
 
-void assignerCouleur(Combinaison* combinaison, int index, char couleur[50]) {
-	combinaison->couleur[index] = couleur;
+void afficherCombinaison(Couleur** combinaison, int taille) {
+	for (int i = 0; i < taille; i++) {
+	}
+	printf("\033[0;34mOOOO \033[0m");
 }
+
+
 
