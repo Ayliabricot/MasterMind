@@ -12,6 +12,14 @@ Couleur** creerCombinaison(int taille) {
 	return nouvelle_combinaison;
 }
 
+Couleur*** creerTableauCombinaisons() {
+	Couleur*** nouveau_tableau = malloc(10 * sizeof(Couleur));
+	for (int i = 0; i < 10; i++) {
+		nouveau_tableau[i] = NULL;
+	}
+	return nouveau_tableau;
+}
+
 Couleur* definirCouleur(char couleur[9]) {
 	Couleur* nouvelle_couleur = malloc(sizeof(Couleur));
 	strcpy_s(nouvelle_couleur->couleur, sizeof(couleur), couleur);
@@ -27,6 +35,20 @@ void afficherCombinaison(Couleur** combinaison, int taille, char couleurs[9][9],
         }
     }
 }
+
+void remplirCombinaison(Couleur** combinaison, int taille, char couleurs[9][9]) {
+	int choix;
+	for (int i = 0; i < 8; i++) {
+		printf("%d - %s\n", i + 1, couleurs[i]);
+	}
+	printf("\n");
+	for (int i = 0; i < taille; i++) {
+		printf("Couleur en position %d : ", i+1);
+		scanf_s("%d", &choix);
+		combinaison[i] = definirCouleur(couleurs[choix-1]);
+	}
+}
+
 
 
 
