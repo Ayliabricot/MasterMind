@@ -26,14 +26,18 @@ Couleur* definirCouleur(char couleur[9]) {
 	return nouvelle_couleur;
 }
 
-void afficherCombinaison(Couleur** combinaison, int taille, char couleurs[9][9], char ansi[9][5]) {
-    for (int i = 0; i < taille; i++) {
-        for (int j = 0; j < 9; j++) {
-            if (strcmp(combinaison[i]->couleur,couleurs[j])==0) {
-                printf("\033[%smO \033[0m", ansi[j]);
-            }
-        }
-    }
+void afficherCombinaison(Couleur** combinaison, int taille, char couleurs[9][9], char ansi[9][9]) {
+	for (int i = 0; i < taille; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (strcmp(combinaison[i]->couleur, couleurs[j]) == 0) {
+				printf("\033[%smO \033[0m", ansi[j]);
+			}
+			else if (strcmp(combinaison[i]->couleur, "noir") == 0) {
+				printf("\033[0;30mO \033[0m");
+			}
+		}
+	}
+	printf("\n");
 }
 
 void remplirCombinaison(Couleur** combinaison, int taille, char couleurs[9][9]) {
@@ -43,13 +47,58 @@ void remplirCombinaison(Couleur** combinaison, int taille, char couleurs[9][9]) 
 	}
 	printf("\n");
 	for (int i = 0; i < taille; i++) {
-		printf("Couleur en position %d : ", i+1);
+		printf("Couleur en position %d : ", i + 1);
 		scanf_s("%d", &choix);
-		combinaison[i] = definirCouleur(couleurs[choix-1]);
+		combinaison[i] = definirCouleur(couleurs[choix - 1]);
 	}
 }
 
+int verifier(Couleur** proposition, int taille, Couleur** reponse, Couleur** correction, char couleurs[9][9]) {
+	int victoire = 1;
+	int vert = 0;
+	int orange = 0;
+	int noir = 0;
+	int pionPresent = 0;
+	Couleur* comparer = NULL;
+	for (int i = 0; i < taille; i++) {
+		for (int j = 0; j < taille; j++) {
+			if (strcmp(proposition[i]->couleur, reponse[j]->couleur) == 0 && i == j) {
+				vert++;
+				pionPresent = 1;
+			}
+			else if (strcmp(proposition[i]->couleur, reponse[j]->couleur) == 0 && i != j) {
+				orange++;
+				victoire = 0;
+				pionPresent = 1;
+			}
+		}
+		if (pionPresent == 0) {
+			noir++;
+			victoire = 0;
+		}
+		pionPresent = 0;
+	}
+	for (int i = 0; i < vert; i++) {
+		correction[i] = definirCouleur("vert");
+	}
+	for (int i = 0; i < orange; i++) {
+		correction[i+vert] = definirCouleur("orange");
+	}
+	for (int i = 0; i < noir; i++) {
+		correction[i + vert + orange] = definirCouleur("noir");
+	}
+	return victoire;
+}
 
+void afficherTout(Couleur*** tableau_propositions, Couleur*** tableau_corrections, int tentatives, int taille, char couleurs[9][9], char ansi[9][9]) {
+	for (int i = 0; i < tentatives; i++) {
+		printf("Essai %d : ", tentatives + 1);
+		afficherCombinaison(tableau_propositions[i], taille, couleurs, ansi);
+		printf("       -> ");
+		afficherCombinaison(tableau_corrections[i], taille, couleurs, ansi);
+	}
+	printf("\n");
+}
 
 
 
